@@ -136,7 +136,7 @@ impl<'a> ChrootConfigurator<'a> {
         pass: Option<&str>,
         fullname: Option<&str>,
     ) -> io::Result<()> {
-        let mut command = self.chroot.command("useradd", &["-m", "-G", "adm,sudo"]);
+        let mut command = self.chroot.command("useradd", &["-m", "-G", "adm,lpadmin,sudo"]);
         if let Some(name) = fullname {
             command.args(&["-c", name, user]);
         } else {

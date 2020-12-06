@@ -218,7 +218,11 @@ where
                 .takes_value(true)
                 .multiple(true),
         )
-        .get_matches_from(args);
+        .get_matches_from_safe(args)
+        .map_err(|err| io::Error::new(
+            io::ErrorKind::Other,
+            err
+        ))?;
 
     if let Err(err) = distinst::log(|_level, _message| {}) {
         eprintln!("Failed to initialize logging: {}", err);
